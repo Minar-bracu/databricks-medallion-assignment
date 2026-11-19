@@ -1,0 +1,45 @@
+resources:
+  jobs:
+    ecom_medallion_pipeline:
+      name: ecom_medallion_pipeline
+      email_notifications:
+        on_failure:
+          - minar21053@gmail.com
+      tasks:
+        - task_key: bronze_ingest
+          notebook_task:
+            notebook_path: /Workspace/Users/minar21053@gmail.com/01_bronze_ingestion
+            source: WORKSPACE
+          max_retries: 1
+          min_retry_interval_millis: 60000
+          disable_auto_optimization: false
+        - task_key: silver_orders
+          depends_on:
+            - task_key: bronze_ingest
+          notebook_task:
+            notebook_path: /Workspace/Users/minar21053@gmail.com/02_silver_orders
+            source: WORKSPACE
+          max_retries: 1
+          min_retry_interval_millis: 60000
+          disable_auto_optimization: false
+        - task_key: silver_transactions
+          depends_on:
+            - task_key: silver_orders
+          notebook_task:
+            notebook_path: /Workspace/Users/minar21053@gmail.com/03_silver_transactions
+            source: WORKSPACE
+          max_retries: 1
+          min_retry_interval_millis: 60000
+          disable_auto_optimization: false
+        - task_key: gold_marts
+          depends_on:
+            - task_key: silver_transactions
+          notebook_task:
+            notebook_path: /Workspace/Users/minar21053@gmail.com/04_gold
+            source: WORKSPACE
+          max_retries: 1
+          min_retry_interval_millis: 60000
+          disable_auto_optimization: false
+      queue:
+        enabled: true
+      performance_target: PERFORMANCE_OPTIMIZED
