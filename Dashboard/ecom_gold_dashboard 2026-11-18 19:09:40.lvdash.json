@@ -1,0 +1,581 @@
+{
+  "datasets": [
+    {
+      "name": "5f290f58",
+      "displayName": "gold_daily_sales",
+      "queryLines": [
+        "SELECT * FROM workspace.ecom_poc.gold_daily_sales"
+      ],
+      "columns": [
+        {
+          "displayName": "cancellation_rate_total",
+          "description": "Overall cancellation rate: SUM(cancelled_orders) / SUM(orders_count)",
+          "expression": "TRY_DIVIDE(SUM(`cancelled_orders`), SUM(`orders_count`))"
+        }
+      ]
+    },
+    {
+      "name": "88cf3d5c",
+      "displayName": "gold_revenue_breakdown",
+      "queryLines": [
+        "SELECT * FROM workspace.ecom_poc.gold_revenue_breakdown"
+      ]
+    },
+    {
+      "name": "7a9614e0",
+      "displayName": "gold_payment_success",
+      "queryLines": [
+        "SELECT * FROM workspace.ecom_poc.gold_payment_success"
+      ],
+      "columns": [
+        {
+          "displayName": "payment_success_rate",
+          "description": "Overall payment success rate: SUM(success_txns) / SUM(total_txns)",
+          "expression": "TRY_DIVIDE(SUM(success_txns), SUM(total_txns))"
+        }
+      ]
+    },
+    {
+      "name": "75b6d86c",
+      "displayName": "gold_top_customers",
+      "queryLines": [
+        "SELECT * FROM workspace.ecom_poc.gold_top_customers"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "e0d90a8f",
+      "displayName": "Econ_gold",
+      "layout": [
+        {
+          "widget": {
+            "name": "kpi_revenue",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5f290f58",
+                  "fields": [
+                    {
+                      "name": "sum(revenue_usd)",
+                      "expression": "SUM(`revenue_usd`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": false,
+                "showDescription": false,
+                "title": {
+                  "value": "Total Net Revenue",
+                  "fields": []
+                }
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(revenue_usd)",
+                  "format": {
+                    "type": "number-currency",
+                    "currencyCode": "USD",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 2
+                    }
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_paid_orders",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5f290f58",
+                  "fields": [
+                    {
+                      "name": "sum(orders_count)",
+                      "expression": "SUM(`orders_count`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Total Orders"
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(orders_count)",
+                  "rowNumber": 0
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 0,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_cancel_rate",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5f290f58",
+                  "fields": [
+                    {
+                      "name": "measure(cancellation_rate_total)",
+                      "expression": "MEASURE(`cancellation_rate_total`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Cancellation Rate"
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "measure(cancellation_rate_total)",
+                  "rowNumber": 0,
+                  "format": {
+                    "type": "number-percent",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 2
+                    }
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 0,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_payment_success",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "7a9614e0",
+                  "fields": [
+                    {
+                      "name": "measure(payment_success_rate)",
+                      "expression": "MEASURE(`payment_success_rate`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Payment Success Rate",
+                  "fields": []
+                }
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "measure(payment_success_rate)",
+                  "rowNumber": 0,
+                  "format": {
+                    "type": "number-percent",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 2
+                    }
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 9,
+            "y": 0,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "daily_revenue_line",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "5f290f58",
+                  "fields": [
+                    {
+                      "name": "daily(order_date)",
+                      "expression": "DATE_TRUNC(\"DAY\", `order_date`)"
+                    },
+                    {
+                      "name": "sum(revenue_usd)",
+                      "expression": "SUM(`revenue_usd`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Daily Net Revenue",
+                  "fields": []
+                }
+              },
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "daily(order_date)",
+                  "displayName": "Order Date",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(revenue_usd)",
+                  "format": {
+                    "type": "number-currency",
+                    "abbreviation": "compact",
+                    "currencyCode": "USD",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "displayName": "Net Revenue (USD)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 3,
+            "width": 12,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "revenue_by_category",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "88cf3d5c",
+                  "fields": [
+                    {
+                      "name": "category",
+                      "expression": "`category`"
+                    },
+                    {
+                      "name": "sum(revenue_usd)",
+                      "expression": "SUM(`revenue_usd`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Revenue by Category",
+                  "fields": []
+                }
+              },
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "category",
+                  "displayName": "category",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(revenue_usd)",
+                  "format": {
+                    "type": "number-currency",
+                    "abbreviation": "compact",
+                    "currencyCode": "USD",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "displayName": "Revenue (USD)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "category",
+                  "displayName": "category",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 11,
+            "width": 6,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "success_by_method",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "7a9614e0",
+                  "fields": [
+                    {
+                      "name": "payment_method",
+                      "expression": "`payment_method`"
+                    },
+                    {
+                      "name": "measure(payment_success_rate)",
+                      "expression": "MEASURE(`payment_success_rate`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Success Rate by Payment Method",
+                  "fields": []
+                }
+              },
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "payment_method",
+                  "displayName": "payment_method",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "measure(payment_success_rate)",
+                  "format": {
+                    "type": "number-percent",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "displayName": "payment_success_rate",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "payment_method",
+                  "displayName": "payment_method",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 11,
+            "width": 6,
+            "height": 8
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "global_filters",
+      "displayName": "Global Filters",
+      "layout": [
+        {
+          "widget": {
+            "name": "order_date_filter",
+            "queries": [
+              {
+                "name": "dashboards/01f1e351514312588afdf5c3a8ad08c5/datasets/01f1e351758b1b0fafcb7f5f25865fc9_order_date",
+                "query": {
+                  "datasetName": "5f290f58",
+                  "fields": [
+                    {
+                      "name": "order_date",
+                      "expression": "`order_date`"
+                    },
+                    {
+                      "name": "order_date_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "dashboards/01f1e351514312588afdf5c3a8ad08c5/datasets/01f1e3518a521f7899e1788bae39052e_order_date",
+                "query": {
+                  "datasetName": "88cf3d5c",
+                  "fields": [
+                    {
+                      "name": "order_date",
+                      "expression": "`order_date`"
+                    },
+                    {
+                      "name": "order_date_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "dashboards/01f1e351514312588afdf5c3a8ad08c5/datasets/01f1e3519804170dbf7eb235ebed80d7_txn_date",
+                "query": {
+                  "datasetName": "7a9614e0",
+                  "fields": [
+                    {
+                      "name": "txn_date",
+                      "expression": "`txn_date`"
+                    },
+                    {
+                      "name": "txn_date_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Date Range",
+                  "fields": []
+                }
+              },
+              "widgetType": "filter-date-range-picker",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "order_date",
+                    "queryName": "dashboards/01f1e351514312588afdf5c3a8ad08c5/datasets/01f1e351758b1b0fafcb7f5f25865fc9_order_date"
+                  },
+                  {
+                    "fieldName": "order_date",
+                    "queryName": "dashboards/01f1e351514312588afdf5c3a8ad08c5/datasets/01f1e3518a521f7899e1788bae39052e_order_date"
+                  },
+                  {
+                    "fieldName": "txn_date",
+                    "queryName": "dashboards/01f1e351514312588afdf5c3a8ad08c5/datasets/01f1e3519804170dbf7eb235ebed80d7_txn_date"
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 4,
+            "height": 3
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_GLOBAL_FILTERS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}

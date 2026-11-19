@@ -1,0 +1,49 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 0,
+   "metadata": {
+    "application/vnd.databricks.v1+cell": {
+     "cellMetadata": {},
+     "inputWidgets": {},
+     "nuid": "9de8142d-ca0b-4198-ba9c-7496e9599aa0",
+     "showTitle": false,
+     "tableResultSettingsMap": {},
+     "title": ""
+    }
+   },
+   "outputs": [],
+   "source": [
+    "SELECT customer_id, revenue_usd \n",
+    "FROM workspace.ecom_poc.gold_top_customers \n",
+    "ORDER BY revenue_usd DESC LIMIT 1;"
+   ]
+  }
+ ],
+ "metadata": {
+  "application/vnd.databricks.v1+notebook": {
+   "computePreferences": null,
+   "dashboards": [],
+   "environmentMetadata": null,
+   "inputWidgetPreferences": null,
+   "language": "sql",
+   "notebookMetadata": {
+    "pythonIndentUnit": 4,
+    "sqlQueryOptions": {
+     "applyAutoLimit": false,
+     "catalog": "workspace",
+     "metastore": null,
+     "schema": "default"
+    }
+   },
+   "notebookName": "customer by total spend?",
+   "widgets": {}
+  },
+  "language_info": {
+   "name": "sql"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 0
+}
