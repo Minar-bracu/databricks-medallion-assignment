@@ -1,0 +1,32 @@
+file,category,field,rows,pct
+orders.csv,Null/blank value,customer_id,5000,0.5
+orders.csv,Null/blank value,category,4000,0.4
+orders.csv,Null/blank value,country,3000,0.3
+orders.csv,Text inside numeric field,quantity,4000,0.4
+orders.csv,Text inside numeric field,unit_price,3000,0.3
+orders.csv,Negative / out-of-range number,quantity,4000,0.4
+orders.csv,Negative / out-of-range number,unit_price,3000,0.3
+orders.csv,Invalid timestamp/date,order_date,3000,0.3
+orders.csv,Future timestamp/date,order_date,3000,0.3
+orders.csv,Inconsistent case/whitespace,order_status,20000,2.0
+orders.csv,Inconsistent case/whitespace,category,15000,1.5
+orders.csv,Inconsistent case/whitespace,country,15000,1.5
+orders.csv,Invalid label (not an allowed status),order_status,2000,0.2
+orders.csv,Exact duplicate row,(entire row),10000,1.0
+orders.csv,"Duplicate business key, conflicting content",order_id,5000,0.5
+transactions.csv,Null/blank value,order_id,3000,0.3
+transactions.csv,Null/blank value,payment_method,4000,0.4
+transactions.csv,Null/blank value,amount,3000,0.3
+transactions.csv,Null/blank value,currency,2000,0.2
+transactions.csv,Null/blank value,txn_status,2000,0.2
+transactions.csv,Text inside numeric field,amount,4000,0.4
+transactions.csv,Negative / out-of-range number,amount,4000,0.4
+transactions.csv,Invalid timestamp/date,txn_ts,3000,0.3
+transactions.csv,Future timestamp/date,txn_ts,3000,0.3
+transactions.csv,Inconsistent case/whitespace,payment_method,20000,2.0
+transactions.csv,Inconsistent case/whitespace,txn_status,20000,2.0
+transactions.csv,Inconsistent case/whitespace,currency,15000,1.5
+transactions.csv,Unsupported currency code,currency,2000,0.2
+transactions.csv,Orphan order_id (no matching order),order_id,5000,0.5
+transactions.csv,Exact duplicate row,(entire row),10000,1.0
+transactions.csv,"Duplicate business key, conflicting content",txn_id,5000,0.5
