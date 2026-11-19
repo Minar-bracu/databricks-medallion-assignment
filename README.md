@@ -327,16 +327,7 @@ GRANT SELECT ON TABLE workspace.ecom_poc.gold_top_customers     TO `reporting_us
 
 **Test plan (not executed, since the group has no member):** signed in as a member, `SELECT` from a Gold table should succeed; `SELECT` from `silver_orders` or `quarantine_orders`, `DROP TABLE` on a Gold table, and browsing the raw volume should all fail with permission errors. Members also need *Can use* on a SQL warehouse.
 
-## 14. Cleanup checklist (`operations/cleanup_checklist.md`)
-
-- [x] SQL warehouse stopped (status "Stopped" confirmed)
-- [ ] No schedules enabled (job has none; dashboard has no scheduled refresh)
-- [x] Remaining trial credits recorded: $370 of $400 (panel updated 3 days earlier)
-- [ ] Notebooks, job YAML, dashboard export and `.pbix` saved in Git
-- [ ] All commits pushed
-- [ ] Repository checked: no tokens, account IDs, secrets or personal email addresses
-
-## 15. Disclosures and limitations
+## 14. Disclosures and limitations
 
 - Serverless-only workspace; no classic compute.
 - Fixed assumed FX rates are used for USD conversion.
@@ -346,7 +337,7 @@ GRANT SELECT ON TABLE workspace.ecom_poc.gold_top_customers     TO `reporting_us
 - Git history was created at the end of development.
 - The reporting-access test plan was not executed with a signed-in member.
 
-## 16. Repository layout
+## 15. Repository layout
 
 ```
 README.md
@@ -357,7 +348,7 @@ sql/          setup, source_row_counts, rules, grants, silver evidence, cross-to
 dashboards/   dashboard export, Genie checks
 powerbi/      `.pbix`
 evidence/     topic-labelled output snippets and query results
-operations/   JobPipeline.yaml, cleanup_checklist.md
+operations/   JobPipeline.yaml
 ```
 
 The two source CSVs are intentionally not in Git.
